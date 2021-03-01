@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "AcademyFoodScanner",
+  "appName": "academy-food-scanner",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
