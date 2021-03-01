@@ -6,8 +6,8 @@
 
 <ion-content>
   <div>
-    <ion-button expand="block" [routerLink]="['/product-detail/' + randomBarcode]">
-        <ion-icon name="open-outline"></ion-icon> Go to Product Detail
+    <ion-button expand="block" (click)="scanBarcode()">
+        <ion-icon name="barcode-outline"></ion-icon><span class="padding-left">Go to Product Detail</span>
     </ion-button>
   </div>
 </ion-content>

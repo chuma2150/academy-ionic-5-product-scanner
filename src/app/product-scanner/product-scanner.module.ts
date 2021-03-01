@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { ProductScannerPage } from './product-scanner.page';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
+import { ProductScannerPage } from './product-scanner.page';
 import { ProductScannerPageRoutingModule } from './product-scanner-routing.module';
 
 
@@ -14,6 +15,7 @@ import { ProductScannerPageRoutingModule } from './product-scanner-routing.modul
     IonicModule,
     ProductScannerPageRoutingModule
   ],
-  declarations: [ProductScannerPage]
+  declarations: [ProductScannerPage],
+  providers: [BarcodeScanner]
 })
 export class ProductScannerPageModule {}

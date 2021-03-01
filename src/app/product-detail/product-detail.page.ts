@@ -31,13 +31,13 @@ export class ProductDetailPage implements OnInit {
   }
 
   loadProductInfo(barcode: string) {
-    let productInfoObservable = this.openFoodApi.listProducts([], [barcode]);
+    const productInfoObservable = this.openFoodApi.listProducts([], [barcode]);
 
     productInfoObservable.subscribe(async (response: ProductResponse) => {
       this.product = response.data[0];
       await this.closeLoading();
     }, async (error: Error) => {
-      await this.showLoadingError(error)
+      await this.showLoadingError(error);
       await this.closeLoading();
     });
   }

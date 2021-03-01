@@ -1,3 +1,9 @@
-ion-content > div {
-  padding: 5px;
+ion-content {
+  > div {
+    padding: 5px;
+  }
+
+  .padding-left {
+    padding-left: 5px;
+  }
 }
