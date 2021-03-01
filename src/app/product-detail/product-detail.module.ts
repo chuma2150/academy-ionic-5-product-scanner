@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 import { ProductDetailPageRoutingModule } from './product-detail-routing.module';
 
@@ -17,6 +17,7 @@ import { OpenFoodModule } from '../openfood-api/openfood.module';
     ProductDetailPageRoutingModule,
     OpenFoodModule,
   ],
-  declarations: [ProductDetailPage]
+  declarations: [ProductDetailPage],
+  providers: [NativeStorage]
 })
 export class ProductDetailPageModule {}
