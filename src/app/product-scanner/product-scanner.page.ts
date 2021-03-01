@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-product-scanner',
@@ -8,17 +7,12 @@ import { AlertController } from '@ionic/angular';
 })
 export class ProductScannerPage {
 
-  constructor(public alertController: AlertController) {}
+  barcodes: Array<string> = ['7613269300748', '7617400030716', '4104420034167', '7613269018421', '87157420'];
+  randomBarcode: string;
 
-  async showAlert() {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Alert',
-      subHeader: 'Subtitle',
-      message: 'This is an alert message.',
-      buttons: ['OK']
-    });
+  constructor() {}
 
-    await alert.present();
+  ionViewWillEnter() {
+    this.randomBarcode = this.barcodes[Math.floor(Math.random() * this.barcodes.length)];
   }
 }

@@ -1,7 +1,13 @@
-<div id="container">
-  <ion-button id="show-alert"
-    (click)="showAlert()"
-    expand="block">
-      <ion-icon name="alert-outline"></ion-icon> Show alert
-  </ion-button>
-</div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Product Scanner</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-button expand="block" [routerLink]="['/product-detail/' + randomBarcode]">
+        <ion-icon name="open-outline"></ion-icon> Go to Product Detail
+    </ion-button>
+  </div>
+</ion-content>
