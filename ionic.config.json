@@ -1,0 +1,7 @@
+{
+  "name": "AcademyFoodScanner",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
