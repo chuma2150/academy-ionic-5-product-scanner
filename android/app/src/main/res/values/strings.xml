@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">academy-food-scanner</string>
+    <string name="title_activity_main">academy-food-scanner</string>
+    <string name="package_name">ch.ti8m.academy.ionic.mau</string>
+    <string name="custom_url_scheme">ch.ti8m.academy.ionic.mau</string>
+</resources>
