@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { Product, ProductResponse } from '../openfood-api/model/models';
+import { Image, Product, ProductResponse } from '../openfood-api/model/models';
 import { OpenFoodService } from '../openfood-api/openfood.service';
 
 @Component({
@@ -12,15 +13,15 @@ import { OpenFoodService } from '../openfood-api/openfood.service';
 export class ProductDetailPage implements OnInit {
 
   product: Product;
-  isLoading: boolean;
-  loadingElement: HTMLIonLoadingElement;
+  imageUrls: Array<string> = [];
+  private loadingElement: HTMLIonLoadingElement;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private openFoodApi: OpenFoodService,
     private toastController: ToastController,
     private loadingController: LoadingController,
-    private router: Router) { }
+    private location: Location) { }
 
   async ngOnInit() {
     await this.presentLoading();
@@ -34,22 +35,28 @@ export class ProductDetailPage implements OnInit {
     const productInfoObservable = this.openFoodApi.listProducts([], [barcode]);
 
     productInfoObservable.subscribe(async (response: ProductResponse) => {
-      this.product = response.data[0];
       await this.closeLoading();
+
+      if (response.data.length > 0) {
+        this.product = response.data[0];
+        this.imageUrls = this.product.images.map((image: Image) => image.large);
+      } else {
+        await this.showLoadingError();
+      }
     }, async (error: Error) => {
       await this.showLoadingError(error);
       await this.closeLoading();
     });
   }
 
-  async showLoadingError(error: Error) {
+  async showLoadingError(error?: Error) {
     const toast = await this.toastController.create({
-      message: `Product could not been loaded\n${error?.message}`,
+      message: `Product could not been ${error ? `loaded\n${error?.message}` : 'found' }`,
       duration: 4000
     });
 
     await toast.present();
-    this.router.navigateByUrl('/');
+    this.location.back();
   }
 
   async presentLoading() {

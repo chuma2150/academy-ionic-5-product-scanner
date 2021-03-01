@@ -3,31 +3,43 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ product ? product.display_name_translations.de : 'Product Detail' }}</ion-title>
+    <ion-title>{{ product?.display_name_translations.de }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>  
-  <ion-grid *ngIf="product">
-    <ion-row >
-      <ion-col size="6"></ion-col>
-      <ion-col class="align-right">je 100</ion-col>
-      <ion-col class="align-right">je Port.</ion-col>
-      <ion-col class="align-right">je Tag</ion-col>
-    </ion-row>
-    <ion-row *ngFor="let nutrient of product.nutrients | keyvalue">
-      <ion-col size="6">
-        {{ nutrient.value.name_translations.de }}
-      </ion-col>
-      <ion-col class="align-right">
-        {{ nutrient.value.per_hundred }}{{ nutrient.value.per_hundred === null ? '-' : nutrient.value.unit }}
-      </ion-col>
-      <ion-col class="align-right">
-        {{ nutrient.value.per_portion }}{{ nutrient.value.per_portion === null ? '-' : nutrient.value.unit }}
-      </ion-col>
-      <ion-col class="align-right">
-        {{ nutrient.value.per_day }}{{ nutrient.value.per_day === null ? '-' : '%' }}
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content>
+  <ion-slides *ngIf="imageUrls.length > 0" pager class="half-height">
+    <ion-slide *ngFor="let url of imageUrls">
+      <img [src]="url" />
+    </ion-slide>
+  </ion-slides>
+
+  <ng-container *ngIf="product">
+    <h2 class="centered">
+      {{ (product.nutrients | keyvalue).length > 0 ? 'Nutritional Information' : 'No nutritional information found' }}
+    </h2>
+
+    <ion-grid *ngIf="(product.nutrients | keyvalue).length > 0">
+      <ion-row >
+        <ion-col size="6"></ion-col>
+        <ion-col class="align-right">je 100</ion-col>
+        <ion-col class="align-right">je Port.</ion-col>
+        <ion-col class="align-right">je Tag</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let nutrient of product.nutrients | keyvalue">
+        <ion-col size="6">
+          {{ nutrient.value.name_translations.de }}
+        </ion-col>
+        <ion-col class="align-right">
+          {{ nutrient.value.per_hundred }}{{ nutrient.value.per_hundred === null ? '-' : nutrient.value.unit }}
+        </ion-col>
+        <ion-col class="align-right">
+          {{ nutrient.value.per_portion }}{{ nutrient.value.per_portion === null ? '-' : nutrient.value.unit }}
+        </ion-col>
+        <ion-col class="align-right">
+          {{ nutrient.value.per_day }}{{ nutrient.value.per_day === null ? '-' : '%' }}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
 </ion-content>

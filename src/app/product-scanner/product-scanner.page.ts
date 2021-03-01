@@ -13,8 +13,8 @@ const { Haptics, Toast } = Plugins;
 })
 export class ProductScannerPage {
 
-  barcodes: Array<string> = ['7613269300748', '7617400030716', '4104420034167', '7613269018421', '87157420'];
-  randomBarcode: string;
+  private barcodes: Array<string> = ['7613269300748', '7617400030716', '4104420034167', '7613269018421', '87157420'];
+  private randomBarcode: string;
 
   constructor(private router: Router, private barcodeScanner: BarcodeScanner) {}
 
@@ -28,7 +28,7 @@ export class ProductScannerPage {
         const barcode = result.text;
 
         Haptics.vibrate();
-        await Toast.show({ text: `Produkt gefunden: ${barcode}`, duration: 'long' });
+        await Toast.show({ text: `Product found: ${barcode}`, duration: 'long' });
         this.router.navigateByUrl(`product-detail/${barcode}`);
       }
     }).catch(_ => this.router.navigateByUrl(`product-detail/${this.randomBarcode}`));
