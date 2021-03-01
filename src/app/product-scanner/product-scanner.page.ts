@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-product-scanner',
+  templateUrl: 'product-scanner.page.html',
+  styleUrls: ['product-scanner.page.scss'],
 })
-export class HomePage {
+export class ProductScannerPage {
 
   constructor(public alertController: AlertController) {}
 
