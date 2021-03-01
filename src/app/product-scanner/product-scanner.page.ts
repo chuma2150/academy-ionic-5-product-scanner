@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
 
-const { Haptics } = Plugins;
+const { Haptics, Toast } = Plugins;
 
 @Component({
   selector: 'app-product-scanner',
@@ -23,10 +23,13 @@ export class ProductScannerPage {
   }
 
   scanBarcode() {
-    this.barcodeScanner.scan().then(result => {
+    this.barcodeScanner.scan({ formats: 'EAN_8,EAN_13', resultDisplayDuration: 0 }).then(async result => {
       if (!result.cancelled) {
+        const barcode = result.text;
+
         Haptics.vibrate();
-        this.router.navigateByUrl(`product-detail/${result.text}`);
+        await Toast.show({ text: `Produkt gefunden: ${barcode}`, duration: 'long' });
+        this.router.navigateByUrl(`product-detail/${barcode}`);
       }
     }).catch(_ => this.router.navigateByUrl(`product-detail/${this.randomBarcode}`));
   }
